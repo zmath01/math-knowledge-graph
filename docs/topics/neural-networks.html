@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neural Networks and Backpropagation | Math Knowledge Graph</title>
+  <base href="/MATHgraph/">
+  <link rel="stylesheet" href="/MATHgraph/assets/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+</head>
+<body>
+<header class="site-header">
+  <a class="logo" href="/MATHgraph/index.html">Math Knowledge Graph</a>
+  <div class="search-box">
+    <input id="search-input" type="text" placeholder="Search topics, tags, formulas..." autocomplete="off">
+    <div id="search-results" class="search-results"></div>
+  </div>
+</header>
+<div class="layout">
+  <aside class="sidebar">
+    <nav><ul><li><a  href="/MATHgraph/index.html">Knowledge Graph</a></li></ul><h3>Calculus &amp; Analysis</h3><ul><li><a  href="/MATHgraph/topics/limits-continuity.html">Limits and Continuity</a></li><li><a  href="/MATHgraph/topics/differentiation.html">Differentiation</a></li><li><a  href="/MATHgraph/topics/integration.html">Integration</a></li><li><a  href="/MATHgraph/topics/sequences-series.html">Sequences and Series</a></li><li><a  href="/MATHgraph/topics/multivariable-calculus.html">Multivariable Calculus</a></li><li><a  href="/MATHgraph/topics/vector-calculus.html">Vector Calculus</a></li><li><a  href="/MATHgraph/topics/ordinary-differential-equations.html">Ordinary Differential Equations</a></li><li><a  href="/MATHgraph/topics/partial-differential-equations.html">Partial Differential Equations</a></li><li><a  href="/MATHgraph/topics/complex-analysis.html">Complex Analysis</a></li><li><a  href="/MATHgraph/topics/fourier-analysis.html">Fourier Analysis</a></li></ul><h3>Linear Algebra</h3><ul><li><a  href="/MATHgraph/topics/vectors-matrices.html">Vectors and Matrices</a></li><li><a  href="/MATHgraph/topics/linear-systems.html">Systems of Linear Equations</a></li><li><a  href="/MATHgraph/topics/vector-spaces.html">Vector Spaces</a></li><li><a  href="/MATHgraph/topics/linear-transformations.html">Linear Transformations</a></li><li><a  href="/MATHgraph/topics/eigenvalues-eigenvectors.html">Eigenvalues and Eigenvectors</a></li><li><a  href="/MATHgraph/topics/inner-product-spaces.html">Inner Product Spaces</a></li><li><a  href="/MATHgraph/topics/matrix-decompositions.html">Matrix Decompositions</a></li><li><a  href="/MATHgraph/topics/tensors.html">Tensors and Multilinear Algebra</a></li></ul><h3>Probability &amp; Statistics</h3><ul><li><a  href="/MATHgraph/topics/probability-axioms.html">Probability Axioms</a></li><li><a  href="/MATHgraph/topics/random-variables.html">Random Variables</a></li><li><a  href="/MATHgraph/topics/distributions.html">Common Probability Distributions</a></li><li><a  href="/MATHgraph/topics/expectation-variance.html">Expectation, Variance, and Moments</a></li><li><a  href="/MATHgraph/topics/statistical-inference.html">Statistical Inference</a></li><li><a  href="/MATHgraph/topics/stochastic-processes.html">Stochastic Processes</a></li></ul><h3>Optimization</h3><ul><li><a  href="/MATHgraph/topics/convex-optimization.html">Convex Sets and Functions</a></li><li><a  href="/MATHgraph/topics/gradient-descent.html">Gradient Descent</a></li><li><a  href="/MATHgraph/topics/newtons-method.html">Newton&#039;s Method</a></li><li><a  href="/MATHgraph/topics/constrained-optimization.html">Constrained Optimization and KKT Conditions</a></li><li><a  href="/MATHgraph/topics/numerical-optimization.html">Numerical Optimization</a></li></ul><h3>Machine Learning / DL / LLM</h3><ul><li><a  href="/MATHgraph/topics/linear-regression.html">Linear Regression</a></li><li><a  href="/MATHgraph/topics/logistic-regression.html">Logistic Regression</a></li><li><a class="active" href="/MATHgraph/topics/neural-networks.html">Neural Networks and Backpropagation</a></li><li><a  href="/MATHgraph/topics/convolutional-neural-networks.html">Convolutional Neural Networks</a></li><li><a  href="/MATHgraph/topics/recurrent-neural-networks.html">Recurrent Neural Networks</a></li><li><a  href="/MATHgraph/topics/transformers.html">Transformers and Attention</a></li></ul><h3>Quantitative Finance</h3><ul><li><a  href="/MATHgraph/topics/time-series.html">Time Series Analysis</a></li><li><a  href="/MATHgraph/topics/brownian-motion.html">Brownian Motion and Itô Calculus</a></li><li><a  href="/MATHgraph/topics/black-scholes.html">Black-Scholes Model</a></li><li><a  href="/MATHgraph/topics/portfolio-optimization.html">Portfolio Optimization</a></li></ul><h3>Computing &amp; HPC</h3><ul><li><a  href="/MATHgraph/topics/algorithm-complexity.html">Algorithm Complexity and Analysis</a></li><li><a  href="/MATHgraph/topics/parallel-computing.html">Parallel and Distributed Computing</a></li><li><a  href="/MATHgraph/topics/numerical-linear-algebra.html">Numerical Linear Algebra for HPC</a></li></ul></nav>
+  </aside>
+  <main class="main ">
+    
+    <div class="meta">
+      <span class="domain-badge domain-machine-learning">Machine Learning / DL / LLM</span>
+      <span class="text-secondary">Difficulty: Advanced</span>
+    </div>
+    <h1 class="page-title">Neural Networks and Backpropagation</h1>
+    <p>Neural networks are compositions of parameterized nonlinear functions. Backpropagation efficiently computes gradients using the chain rule, enabling training of deep models.</p>
+
+    <div class="section" id="topic-relations"></div>
+
+    <div class="section">
+      <h2>Key Points</h2>
+      <ul class="key-points"><li>A feedforward network computes $f(x) = W_L \sigma(W_{L-1} \cdots \sigma(W_1 x + b_1) \cdots + b_{L-1}) + b_L$.</li><li>Backpropagation applies the chain rule from outputs to inputs.</li><li>Universal approximation theorems show that neural networks can represent broad function classes.</li></ul>
+    </div>
+
+    <div class="section">
+      <h2>Formulas</h2>
+      
+    <div class="formula-card">
+      <div class="name">Layer</div>
+      <div>$$z^{[l]} = W^{[l]} a^{[l-1]} + b^{[l]}, \quad a^{[l]} = \sigma(z^{[l]})$$</div>
+    </div>
+  
+    <div class="formula-card">
+      <div class="name">Loss gradient</div>
+      <div>$$\frac{\partial L}{\partial W^{[l]}} = \delta^{[l]} (a^{[l-1]})^\top$$</div>
+    </div>
+  
+    <div class="formula-card">
+      <div class="name">Chain rule</div>
+      <div>$$\frac{\partial L}{\partial W^{[l]}} = \frac{\partial L}{\partial a^{[L]}} \frac{\partial a^{[L]}}{\partial z^{[L]}} \cdots \frac{\partial z^{[l]}}{\partial W^{[l]}}$$</div>
+    </div>
+  
+    </div>
+
+    <div class="section">
+      <h2>Code Example</h2>
+      
+    <div class="code-card">
+      <pre class="line-numbers"><code class="language-python">import torch
+
+model = torch.nn.Sequential(
+    torch.nn.Linear(10, 64),
+    torch.nn.ReLU(),
+    torch.nn.Linear(64, 1)
+)
+loss_fn = torch.nn.MSELoss()
+optimizer = torch.optim.SGD(model.parameters(), lr=0.01)
+
+# Forward + backward pass
+out = model(x)
+loss = loss_fn(out, y)
+loss.backward()
+optimizer.step()</code></pre>
+    </div>
+  
+    </div>
+
+    
+
+    <div class="section">
+      <h2>Tags</h2>
+      <ul class="tag-list"><li>deep-learning</li><li>chain-rule</li><li>universal-approximation</li></ul>
+    </div>
+
+    <div class="section">
+      <h2>References</h2>
+      <ul class="reference-list">
+    <li>
+      <div class="ref-title">Deep Learning</div>
+      <div class="ref-source">Ian Goodfellow, Yoshua Bengio, and Aaron Courville · MIT Press · <a href="https://www.deeplearningbook.org/" target="_blank" rel="noopener">source</a></div>
+    </li>
+  
+    <li>
+      <div class="ref-title">Neural Networks and Deep Learning</div>
+      <div class="ref-source">Michael Nielsen · Online book · <a href="http://neuralnetworksanddeeplearning.com/" target="_blank" rel="noopener">source</a></div>
+    </li>
+  </ul>
+    </div>
+
+    <div class="section">
+      <h2>Knowledge Graph</h2>
+      <div class="graph-controls">
+        <button id="graph-reset">Reset highlight</button>
+      </div>
+      <div id="topic-graph" class="graph-container"></div>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        initGraph('topic-graph', 'neural-networks');
+        renderTopicRelations({"id":"neural-networks","title":"Neural Networks and Backpropagation","domain":"machine-learning","difficulty":"advanced","prerequisites":["linear-regression","logistic-regression","gradient-descent","multivariable-calculus"],"related":["transformers","convolutional-neural-networks","recurrent-neural-networks"],"summary":"Neural networks are compositions of parameterized nonlinear functions. Backpropagation efficiently computes gradients using the chain rule, enabling training of deep models.","keyPoints":["A feedforward network computes $f(x) = W_L \\sigma(W_{L-1} \\cdots \\sigma(W_1 x + b_1) \\cdots + b_{L-1}) + b_L$.","Backpropagation applies the chain rule from outputs to inputs.","Universal approximation theorems show that neural networks can represent broad function classes."],"formulas":[{"name":"Layer","tex":"z^{[l]} = W^{[l]} a^{[l-1]} + b^{[l]}, \\quad a^{[l]} = \\sigma(z^{[l]})"},{"name":"Loss gradient","tex":"\\frac{\\partial L}{\\partial W^{[l]}} = \\delta^{[l]} (a^{[l-1]})^\\top"},{"name":"Chain rule","tex":"\\frac{\\partial L}{\\partial W^{[l]}} = \\frac{\\partial L}{\\partial a^{[L]}} \\frac{\\partial a^{[L]}}{\\partial z^{[L]}} \\cdots \\frac{\\partial z^{[l]}}{\\partial W^{[l]}}"}],"code":[{"language":"python","snippet":"import torch\n\nmodel = torch.nn.Sequential(\n    torch.nn.Linear(10, 64),\n    torch.nn.ReLU(),\n    torch.nn.Linear(64, 1)\n)\nloss_fn = torch.nn.MSELoss()\noptimizer = torch.optim.SGD(model.parameters(), lr=0.01)\n\n# Forward + backward pass\nout = model(x)\nloss = loss_fn(out, y)\nloss.backward()\noptimizer.step()"}],"references":[{"title":"Deep Learning","author":"Ian Goodfellow, Yoshua Bengio, and Aaron Courville","source":"MIT Press","url":"https://www.deeplearningbook.org/"},{"title":"Neural Networks and Deep Learning","author":"Michael Nielsen","source":"Online book","url":"http://neuralnetworksanddeeplearning.com/"}],"tags":["deep-learning","chain-rule","universal-approximation"],"applications":[]});
+      });
+    </script>
+  
+  </main>
+</div>
+<footer class="site-footer">
+  Content sourced from authoritative English textbooks, papers, and courses. No fabricated data.
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="https://unpkg.com/cytoscape@3.26.0/dist/cytoscape.min.js"></script>
+<script src="/MATHgraph/assets/app.js"></script>
+</body>
+</html>

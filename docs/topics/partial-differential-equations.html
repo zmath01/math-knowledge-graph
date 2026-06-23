@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Partial Differential Equations | Math Knowledge Graph</title>
+  <base href="/MATHgraph/">
+  <link rel="stylesheet" href="/MATHgraph/assets/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+</head>
+<body>
+<header class="site-header">
+  <a class="logo" href="/MATHgraph/index.html">Math Knowledge Graph</a>
+  <div class="search-box">
+    <input id="search-input" type="text" placeholder="Search topics, tags, formulas..." autocomplete="off">
+    <div id="search-results" class="search-results"></div>
+  </div>
+</header>
+<div class="layout">
+  <aside class="sidebar">
+    <nav><ul><li><a  href="/MATHgraph/index.html">Knowledge Graph</a></li></ul><h3>Calculus &amp; Analysis</h3><ul><li><a  href="/MATHgraph/topics/limits-continuity.html">Limits and Continuity</a></li><li><a  href="/MATHgraph/topics/differentiation.html">Differentiation</a></li><li><a  href="/MATHgraph/topics/integration.html">Integration</a></li><li><a  href="/MATHgraph/topics/sequences-series.html">Sequences and Series</a></li><li><a  href="/MATHgraph/topics/multivariable-calculus.html">Multivariable Calculus</a></li><li><a  href="/MATHgraph/topics/vector-calculus.html">Vector Calculus</a></li><li><a  href="/MATHgraph/topics/ordinary-differential-equations.html">Ordinary Differential Equations</a></li><li><a class="active" href="/MATHgraph/topics/partial-differential-equations.html">Partial Differential Equations</a></li><li><a  href="/MATHgraph/topics/complex-analysis.html">Complex Analysis</a></li><li><a  href="/MATHgraph/topics/fourier-analysis.html">Fourier Analysis</a></li></ul><h3>Linear Algebra</h3><ul><li><a  href="/MATHgraph/topics/vectors-matrices.html">Vectors and Matrices</a></li><li><a  href="/MATHgraph/topics/linear-systems.html">Systems of Linear Equations</a></li><li><a  href="/MATHgraph/topics/vector-spaces.html">Vector Spaces</a></li><li><a  href="/MATHgraph/topics/linear-transformations.html">Linear Transformations</a></li><li><a  href="/MATHgraph/topics/eigenvalues-eigenvectors.html">Eigenvalues and Eigenvectors</a></li><li><a  href="/MATHgraph/topics/inner-product-spaces.html">Inner Product Spaces</a></li><li><a  href="/MATHgraph/topics/matrix-decompositions.html">Matrix Decompositions</a></li><li><a  href="/MATHgraph/topics/tensors.html">Tensors and Multilinear Algebra</a></li></ul><h3>Probability &amp; Statistics</h3><ul><li><a  href="/MATHgraph/topics/probability-axioms.html">Probability Axioms</a></li><li><a  href="/MATHgraph/topics/random-variables.html">Random Variables</a></li><li><a  href="/MATHgraph/topics/distributions.html">Common Probability Distributions</a></li><li><a  href="/MATHgraph/topics/expectation-variance.html">Expectation, Variance, and Moments</a></li><li><a  href="/MATHgraph/topics/statistical-inference.html">Statistical Inference</a></li><li><a  href="/MATHgraph/topics/stochastic-processes.html">Stochastic Processes</a></li></ul><h3>Optimization</h3><ul><li><a  href="/MATHgraph/topics/convex-optimization.html">Convex Sets and Functions</a></li><li><a  href="/MATHgraph/topics/gradient-descent.html">Gradient Descent</a></li><li><a  href="/MATHgraph/topics/newtons-method.html">Newton&#039;s Method</a></li><li><a  href="/MATHgraph/topics/constrained-optimization.html">Constrained Optimization and KKT Conditions</a></li><li><a  href="/MATHgraph/topics/numerical-optimization.html">Numerical Optimization</a></li></ul><h3>Machine Learning / DL / LLM</h3><ul><li><a  href="/MATHgraph/topics/linear-regression.html">Linear Regression</a></li><li><a  href="/MATHgraph/topics/logistic-regression.html">Logistic Regression</a></li><li><a  href="/MATHgraph/topics/neural-networks.html">Neural Networks and Backpropagation</a></li><li><a  href="/MATHgraph/topics/convolutional-neural-networks.html">Convolutional Neural Networks</a></li><li><a  href="/MATHgraph/topics/recurrent-neural-networks.html">Recurrent Neural Networks</a></li><li><a  href="/MATHgraph/topics/transformers.html">Transformers and Attention</a></li></ul><h3>Quantitative Finance</h3><ul><li><a  href="/MATHgraph/topics/time-series.html">Time Series Analysis</a></li><li><a  href="/MATHgraph/topics/brownian-motion.html">Brownian Motion and Itô Calculus</a></li><li><a  href="/MATHgraph/topics/black-scholes.html">Black-Scholes Model</a></li><li><a  href="/MATHgraph/topics/portfolio-optimization.html">Portfolio Optimization</a></li></ul><h3>Computing &amp; HPC</h3><ul><li><a  href="/MATHgraph/topics/algorithm-complexity.html">Algorithm Complexity and Analysis</a></li><li><a  href="/MATHgraph/topics/parallel-computing.html">Parallel and Distributed Computing</a></li><li><a  href="/MATHgraph/topics/numerical-linear-algebra.html">Numerical Linear Algebra for HPC</a></li></ul></nav>
+  </aside>
+  <main class="main ">
+    
+    <div class="meta">
+      <span class="domain-badge domain-calculus">Calculus &amp; Analysis</span>
+      <span class="text-secondary">Difficulty: Advanced</span>
+    </div>
+    <h1 class="page-title">Partial Differential Equations</h1>
+    <p>Partial differential equations (PDEs) involve functions of multiple variables and their partial derivatives. They model fundamental phenomena in physics, engineering, and finance.</p>
+
+    <div class="section" id="topic-relations"></div>
+
+    <div class="section">
+      <h2>Key Points</h2>
+      <ul class="key-points"><li>Major classes include elliptic, parabolic, and hyperbolic equations.</li><li>Separation of variables and Fourier methods are classical solution techniques.</li><li>Numerical methods include finite difference, finite element, and spectral methods.</li></ul>
+    </div>
+
+    <div class="section">
+      <h2>Formulas</h2>
+      
+    <div class="formula-card">
+      <div class="name">Heat equation</div>
+      <div>$$\frac{\partial u}{\partial t} = \alpha \nabla^2 u$$</div>
+    </div>
+  
+    <div class="formula-card">
+      <div class="name">Wave equation</div>
+      <div>$$\frac{\partial^2 u}{\partial t^2} = c^2 \nabla^2 u$$</div>
+    </div>
+  
+    <div class="formula-card">
+      <div class="name">Laplace equation</div>
+      <div>$$\nabla^2 u = 0$$</div>
+    </div>
+  
+    </div>
+
+    <div class="section">
+      <h2>Code Example</h2>
+      
+    <div class="code-card">
+      <pre class="line-numbers"><code class="language-python">import numpy as np
+
+# Finite difference for 1D heat equation
+N = 50
+u = np.sin(np.pi * np.linspace(0, 1, N))
+alpha = 0.01
+dt = 0.001
+for _ in range(1000):
+    u[1:-1] += alpha * dt * (u[2:] - 2*u[1:-1] + u[:-2])</code></pre>
+    </div>
+  
+    </div>
+
+    
+    <div class="section">
+      <h2>Applications</h2>
+      <ul>
+        <li><a href="/MATHgraph/topics/black-scholes.html">black-scholes</a></li>
+      </ul>
+    </div>
+  
+
+    <div class="section">
+      <h2>Tags</h2>
+      <ul class="tag-list"><li>pde</li><li>mathematical-physics</li></ul>
+    </div>
+
+    <div class="section">
+      <h2>References</h2>
+      <ul class="reference-list">
+    <li>
+      <div class="ref-title">Partial Differential Equations</div>
+      <div class="ref-source">Lawrence C. Evans · AMS · <a href="https://bookstore.ams.org/view?ProductCode=GSM/19" target="_blank" rel="noopener">source</a></div>
+    </li>
+  
+    <li>
+      <div class="ref-title">Numerical Solution of Partial Differential Equations by the Finite Element Method</div>
+      <div class="ref-source">Claes Johnson · Dover · <a href="https://store.doverpublications.com/048646900x.html" target="_blank" rel="noopener">source</a></div>
+    </li>
+  </ul>
+    </div>
+
+    <div class="section">
+      <h2>Knowledge Graph</h2>
+      <div class="graph-controls">
+        <button id="graph-reset">Reset highlight</button>
+      </div>
+      <div id="topic-graph" class="graph-container"></div>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        initGraph('topic-graph', 'partial-differential-equations');
+        renderTopicRelations({"id":"partial-differential-equations","title":"Partial Differential Equations","domain":"calculus","difficulty":"advanced","prerequisites":["multivariable-calculus","vector-calculus","ordinary-differential-equations"],"related":["fourier-analysis","complex-analysis","numerical-linear-algebra"],"summary":"Partial differential equations (PDEs) involve functions of multiple variables and their partial derivatives. They model fundamental phenomena in physics, engineering, and finance.","keyPoints":["Major classes include elliptic, parabolic, and hyperbolic equations.","Separation of variables and Fourier methods are classical solution techniques.","Numerical methods include finite difference, finite element, and spectral methods."],"formulas":[{"name":"Heat equation","tex":"\\frac{\\partial u}{\\partial t} = \\alpha \\nabla^2 u"},{"name":"Wave equation","tex":"\\frac{\\partial^2 u}{\\partial t^2} = c^2 \\nabla^2 u"},{"name":"Laplace equation","tex":"\\nabla^2 u = 0"}],"code":[{"language":"python","snippet":"import numpy as np\n\n# Finite difference for 1D heat equation\nN = 50\nu = np.sin(np.pi * np.linspace(0, 1, N))\nalpha = 0.01\ndt = 0.001\nfor _ in range(1000):\n    u[1:-1] += alpha * dt * (u[2:] - 2*u[1:-1] + u[:-2])"}],"references":[{"title":"Partial Differential Equations","author":"Lawrence C. Evans","source":"AMS","url":"https://bookstore.ams.org/view?ProductCode=GSM/19"},{"title":"Numerical Solution of Partial Differential Equations by the Finite Element Method","author":"Claes Johnson","source":"Dover","url":"https://store.doverpublications.com/048646900x.html"}],"tags":["pde","mathematical-physics"],"applications":["black-scholes"]});
+      });
+    </script>
+  
+  </main>
+</div>
+<footer class="site-footer">
+  Content sourced from authoritative English textbooks, papers, and courses. No fabricated data.
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="https://unpkg.com/cytoscape@3.26.0/dist/cytoscape.min.js"></script>
+<script src="/MATHgraph/assets/app.js"></script>
+</body>
+</html>

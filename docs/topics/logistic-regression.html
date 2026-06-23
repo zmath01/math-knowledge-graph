@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logistic Regression | Math Knowledge Graph</title>
+  <base href="/MATHgraph/">
+  <link rel="stylesheet" href="/MATHgraph/assets/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+</head>
+<body>
+<header class="site-header">
+  <a class="logo" href="/MATHgraph/index.html">Math Knowledge Graph</a>
+  <div class="search-box">
+    <input id="search-input" type="text" placeholder="Search topics, tags, formulas..." autocomplete="off">
+    <div id="search-results" class="search-results"></div>
+  </div>
+</header>
+<div class="layout">
+  <aside class="sidebar">
+    <nav><ul><li><a  href="/MATHgraph/index.html">Knowledge Graph</a></li></ul><h3>Calculus &amp; Analysis</h3><ul><li><a  href="/MATHgraph/topics/limits-continuity.html">Limits and Continuity</a></li><li><a  href="/MATHgraph/topics/differentiation.html">Differentiation</a></li><li><a  href="/MATHgraph/topics/integration.html">Integration</a></li><li><a  href="/MATHgraph/topics/sequences-series.html">Sequences and Series</a></li><li><a  href="/MATHgraph/topics/multivariable-calculus.html">Multivariable Calculus</a></li><li><a  href="/MATHgraph/topics/vector-calculus.html">Vector Calculus</a></li><li><a  href="/MATHgraph/topics/ordinary-differential-equations.html">Ordinary Differential Equations</a></li><li><a  href="/MATHgraph/topics/partial-differential-equations.html">Partial Differential Equations</a></li><li><a  href="/MATHgraph/topics/complex-analysis.html">Complex Analysis</a></li><li><a  href="/MATHgraph/topics/fourier-analysis.html">Fourier Analysis</a></li></ul><h3>Linear Algebra</h3><ul><li><a  href="/MATHgraph/topics/vectors-matrices.html">Vectors and Matrices</a></li><li><a  href="/MATHgraph/topics/linear-systems.html">Systems of Linear Equations</a></li><li><a  href="/MATHgraph/topics/vector-spaces.html">Vector Spaces</a></li><li><a  href="/MATHgraph/topics/linear-transformations.html">Linear Transformations</a></li><li><a  href="/MATHgraph/topics/eigenvalues-eigenvectors.html">Eigenvalues and Eigenvectors</a></li><li><a  href="/MATHgraph/topics/inner-product-spaces.html">Inner Product Spaces</a></li><li><a  href="/MATHgraph/topics/matrix-decompositions.html">Matrix Decompositions</a></li><li><a  href="/MATHgraph/topics/tensors.html">Tensors and Multilinear Algebra</a></li></ul><h3>Probability &amp; Statistics</h3><ul><li><a  href="/MATHgraph/topics/probability-axioms.html">Probability Axioms</a></li><li><a  href="/MATHgraph/topics/random-variables.html">Random Variables</a></li><li><a  href="/MATHgraph/topics/distributions.html">Common Probability Distributions</a></li><li><a  href="/MATHgraph/topics/expectation-variance.html">Expectation, Variance, and Moments</a></li><li><a  href="/MATHgraph/topics/statistical-inference.html">Statistical Inference</a></li><li><a  href="/MATHgraph/topics/stochastic-processes.html">Stochastic Processes</a></li></ul><h3>Optimization</h3><ul><li><a  href="/MATHgraph/topics/convex-optimization.html">Convex Sets and Functions</a></li><li><a  href="/MATHgraph/topics/gradient-descent.html">Gradient Descent</a></li><li><a  href="/MATHgraph/topics/newtons-method.html">Newton&#039;s Method</a></li><li><a  href="/MATHgraph/topics/constrained-optimization.html">Constrained Optimization and KKT Conditions</a></li><li><a  href="/MATHgraph/topics/numerical-optimization.html">Numerical Optimization</a></li></ul><h3>Machine Learning / DL / LLM</h3><ul><li><a  href="/MATHgraph/topics/linear-regression.html">Linear Regression</a></li><li><a class="active" href="/MATHgraph/topics/logistic-regression.html">Logistic Regression</a></li><li><a  href="/MATHgraph/topics/neural-networks.html">Neural Networks and Backpropagation</a></li><li><a  href="/MATHgraph/topics/convolutional-neural-networks.html">Convolutional Neural Networks</a></li><li><a  href="/MATHgraph/topics/recurrent-neural-networks.html">Recurrent Neural Networks</a></li><li><a  href="/MATHgraph/topics/transformers.html">Transformers and Attention</a></li></ul><h3>Quantitative Finance</h3><ul><li><a  href="/MATHgraph/topics/time-series.html">Time Series Analysis</a></li><li><a  href="/MATHgraph/topics/brownian-motion.html">Brownian Motion and Itô Calculus</a></li><li><a  href="/MATHgraph/topics/black-scholes.html">Black-Scholes Model</a></li><li><a  href="/MATHgraph/topics/portfolio-optimization.html">Portfolio Optimization</a></li></ul><h3>Computing &amp; HPC</h3><ul><li><a  href="/MATHgraph/topics/algorithm-complexity.html">Algorithm Complexity and Analysis</a></li><li><a  href="/MATHgraph/topics/parallel-computing.html">Parallel and Distributed Computing</a></li><li><a  href="/MATHgraph/topics/numerical-linear-algebra.html">Numerical Linear Algebra for HPC</a></li></ul></nav>
+  </aside>
+  <main class="main ">
+    
+    <div class="meta">
+      <span class="domain-badge domain-machine-learning">Machine Learning / DL / LLM</span>
+      <span class="text-secondary">Difficulty: Intermediate</span>
+    </div>
+    <h1 class="page-title">Logistic Regression</h1>
+    <p>Logistic regression models binary probabilities using the logistic function. It is a convex classification method and a building block for neural networks.</p>
+
+    <div class="section" id="topic-relations"></div>
+
+    <div class="section">
+      <h2>Key Points</h2>
+      <ul class="key-points"><li>The logistic (sigmoid) function maps real values to (0,1).</li><li>Maximum likelihood estimation yields a convex optimization problem.</li><li>Newton&#039;s method (iteratively reweighted least squares) solves it efficiently.</li></ul>
+    </div>
+
+    <div class="section">
+      <h2>Formulas</h2>
+      
+    <div class="formula-card">
+      <div class="name">Sigmoid</div>
+      <div>$$\sigma(z) = \frac{1}{1 + e^{-z}}$$</div>
+    </div>
+  
+    <div class="formula-card">
+      <div class="name">Log-odds</div>
+      <div>$$\log \frac{p}{1-p} = X\beta$$</div>
+    </div>
+  
+    <div class="formula-card">
+      <div class="name">Log-likelihood</div>
+      <div>$$\ell(\beta) = \sum_{i=1}^n y_i X_i^\top \beta - \log(1 + e^{X_i^\top \beta})$$</div>
+    </div>
+  
+    </div>
+
+    <div class="section">
+      <h2>Code Example</h2>
+      
+    <div class="code-card">
+      <pre class="line-numbers"><code class="language-python">from sklearn.linear_model import LogisticRegression
+
+# X: features, y: binary labels
+clf = LogisticRegression().fit(X, y)
+print(clf.coef_)</code></pre>
+    </div>
+  
+    </div>
+
+    
+
+    <div class="section">
+      <h2>Tags</h2>
+      <ul class="tag-list"><li>classification</li><li>generalized-linear-models</li></ul>
+    </div>
+
+    <div class="section">
+      <h2>References</h2>
+      <ul class="reference-list">
+    <li>
+      <div class="ref-title">The Elements of Statistical Learning</div>
+      <div class="ref-source">Trevor Hastie, Robert Tibshirani, and Jerome Friedman · Springer · <a href="https://hastie.su.domains/ElemStatLearn/" target="_blank" rel="noopener">source</a></div>
+    </li>
+  
+    <li>
+      <div class="ref-title">Pattern Recognition and Machine Learning</div>
+      <div class="ref-source">Christopher M. Bishop · Springer · <a href="https://www.microsoft.com/en-us/research/publication/pattern-recognition-machine-learning/" target="_blank" rel="noopener">source</a></div>
+    </li>
+  </ul>
+    </div>
+
+    <div class="section">
+      <h2>Knowledge Graph</h2>
+      <div class="graph-controls">
+        <button id="graph-reset">Reset highlight</button>
+      </div>
+      <div id="topic-graph" class="graph-container"></div>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        initGraph('topic-graph', 'logistic-regression');
+        renderTopicRelations({"id":"logistic-regression","title":"Logistic Regression","domain":"machine-learning","difficulty":"intermediate","prerequisites":["linear-regression","statistical-inference","convex-optimization"],"related":["neural-networks","gradient-descent","newtons-method"],"summary":"Logistic regression models binary probabilities using the logistic function. It is a convex classification method and a building block for neural networks.","keyPoints":["The logistic (sigmoid) function maps real values to (0,1).","Maximum likelihood estimation yields a convex optimization problem.","Newton's method (iteratively reweighted least squares) solves it efficiently."],"formulas":[{"name":"Sigmoid","tex":"\\sigma(z) = \\frac{1}{1 + e^{-z}}"},{"name":"Log-odds","tex":"\\log \\frac{p}{1-p} = X\\beta"},{"name":"Log-likelihood","tex":"\\ell(\\beta) = \\sum_{i=1}^n y_i X_i^\\top \\beta - \\log(1 + e^{X_i^\\top \\beta})"}],"code":[{"language":"python","snippet":"from sklearn.linear_model import LogisticRegression\n\n# X: features, y: binary labels\nclf = LogisticRegression().fit(X, y)\nprint(clf.coef_)"}],"references":[{"title":"The Elements of Statistical Learning","author":"Trevor Hastie, Robert Tibshirani, and Jerome Friedman","source":"Springer","url":"https://hastie.su.domains/ElemStatLearn/"},{"title":"Pattern Recognition and Machine Learning","author":"Christopher M. Bishop","source":"Springer","url":"https://www.microsoft.com/en-us/research/publication/pattern-recognition-machine-learning/"}],"tags":["classification","generalized-linear-models"],"applications":[]});
+      });
+    </script>
+  
+  </main>
+</div>
+<footer class="site-footer">
+  Content sourced from authoritative English textbooks, papers, and courses. No fabricated data.
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="https://unpkg.com/cytoscape@3.26.0/dist/cytoscape.min.js"></script>
+<script src="/MATHgraph/assets/app.js"></script>
+</body>
+</html>

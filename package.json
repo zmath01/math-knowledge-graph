@@ -1,0 +1,11 @@
+{
+  "name": "math-knowledge-graph",
+  "version": "1.0.0",
+  "description": "Deployable math knowledge visualization website for GitHub Pages",
+  "scripts": {
+    "build": "node build.js",
+    "serve": "node -e \"const http=require('http'),fs=require('fs'),path=require('path');const server=http.createServer((req,res)=>{let p=req.url==='/'?'/index.html':req.url;p=path.join('docs',p);fs.readFile(p,(err,data)=>{if(err){res.writeHead(404);res.end('Not found');return;}const ext=path.extname(p);const ct=ext==='.html'?'text/html':ext==='.css'?'text/css':ext==='.js'?'application/javascript':ext==='.json'?'application/json':'text/plain';res.writeHead(200,{'Content-Type':ct});res.end(data);});});server.listen(8080,()=>console.log('http://localhost:8080'));\""
+  },
+  "keywords": ["math", "knowledge-graph", "machine-learning", "github-pages", "visualization"],
+  "license": "MIT"
+}
