@@ -27,7 +27,7 @@ jobs:
           node-version: '22'
 
       - name: Build site
-        run: node build.js
+        run: BASE_PATH=/math-knowledge-graph/ node build.js
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
