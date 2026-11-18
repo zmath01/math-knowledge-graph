@@ -2,8 +2,9 @@ const fs = require('fs');
 const path = require('path');
 
 const { topics } = require('./src/data/topics');
+const { buildEdges, normalizeBasePath } = require('./src/data/graph');
 
-const basePath = process.env.BASE_PATH || '/';
+const basePath = normalizeBasePath(process.env.BASE_PATH);
 
 const domainNames = {
   calculus: 'Calculus & Analysis',
@@ -84,14 +85,13 @@ function head(title) {
   <link rel="stylesheet" href="${assetUrl('assets/style.css')}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <script>
     window.MathJax = {
       tex: { inlineMath: [['$', '$'], ['\\\\(', '\\\\)']], displayMath: [['$$', '$$'], ['\\\\[', '\\\\]']] },
       svg: { fontCache: 'global' }
     };
   </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
 </head>`;
 }
 
@@ -140,12 +140,12 @@ function topicPage(t) {
   const formulas = t.formulas.map(f => `
     <div class="formula-card">
       <div class="name">${escapeHtml(f.name)}</div>
-      <div>$$${f.tex}$$</div>
+      <div>$$${escapeHtml(f.tex)}$$</div>
     </div>
   `).join('');
   const code = t.code.map(c => `
     <div class="code-card">
-      <pre class="line-numbers"><code class="language-${c.language}">${escapeHtml(c.snippet)}</code></pre>
+      <pre class="line-numbers"><code class="language-${escapeHtml(c.language)}">${escapeHtml(c.snippet)}</code></pre>
     </div>
   `).join('');
   const references = t.references.map(r => `
@@ -213,7 +213,7 @@ function topicPage(t) {
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         initGraph('topic-graph', '${t.id}');
-        renderTopicRelations(${JSON.stringify(t)});
+        renderTopicRelations(${JSON.stringify(t).replace(/</g, '\\u003c')});
       });
     </script>
   `;
@@ -264,17 +264,13 @@ function indexPage() {
 
 function build() {
   const outDir = path.join(__dirname, 'docs');
+  const edges = buildEdges(topics); // Validate before touching generated output.
   ensureDir(outDir);
   ensureDir(path.join(outDir, 'assets'));
+  fs.rmSync(path.join(outDir, 'topics'), { recursive: true, force: true });
   ensureDir(path.join(outDir, 'topics'));
 
   // Generate data.json
-  const edges = [];
-  for (const t of topics) {
-    for (const p of t.prerequisites || []) edges.push({ source: p, target: t.id, type: 'prerequisite' });
-    for (const r of t.related || []) edges.push({ source: t.id, target: r, type: 'related' });
-    for (const a of t.applications || []) edges.push({ source: t.id, target: a, type: 'application' });
-  }
   const data = { nodes: topics, edges };
   fs.writeFileSync(path.join(outDir, 'data.json'), JSON.stringify(data, null, 2));
 

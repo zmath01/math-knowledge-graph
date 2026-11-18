@@ -92,7 +92,7 @@ const topics = [
     "code": [
       {
         "language": "python",
-        "snippet": "import jax.numpy as jnp\nfrom jax import grad\n\ndef f(x):\n    return jnp.sin(x) ** 2\n\ndf = grad(f)\nprint(df(1.0))  # derivative at x=1"
+        "snippet": "import numpy as np\nimport jax.numpy as jnp\nfrom jax import grad\n\ndef f(x):\n    return jnp.sin(x) ** 2\n\ndf = grad(f)\nprint(df(1.0))  # derivative at x=1"
       }
     ],
     "references": [
@@ -191,12 +191,12 @@ const topics = [
     "keyPoints": [
       "A series converges if its sequence of partial sums converges.",
       "Absolute convergence implies convergence and allows rearrangement.",
-      "Taylor series approximate smooth functions by polynomials."
+      "Taylor polynomials locally approximate sufficiently differentiable functions; equality with an infinite Taylor series requires analyticity."
     ],
     "formulas": [
       {
         "name": "Taylor series",
-        "tex": "f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(a)}{n!}(x-a)^n"
+        "tex": "f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(a)}{n!}(x-a)^n\\quad\\text{within the radius of analyticity}"
       },
       {
         "name": "Geometric series",
@@ -268,7 +268,7 @@ const topics = [
     "code": [
       {
         "language": "python",
-        "snippet": "import jax.numpy as jnp\nfrom jax import grad\n\ndef f(x):\n    return jnp.sum(x ** 2)\n\ngrad_f = grad(f)\nprint(grad_f(jnp.array([1.0, 2.0, 3.0])))  # [2, 4, 6]"
+        "snippet": "import numpy as np\nimport jax.numpy as jnp\nfrom jax import grad\n\ndef f(x):\n    return jnp.sum(x ** 2)\n\ngrad_f = grad(f)\nprint(grad_f(jnp.array([1.0, 2.0, 3.0])))  # [2, 4, 6]"
       }
     ],
     "references": [
@@ -391,7 +391,7 @@ const topics = [
     "code": [
       {
         "language": "python",
-        "snippet": "from scipy.integrate import solve_ivp\n\ndef dy_dt(t, y):\n    return -0.5 * y\n\nsol = solve_ivp(dy_dt, [0, 10], [2.0], t_eval=np.linspace(0, 10, 100))\nprint(sol.y[0, -1])  # decays to ~0.09"
+        "snippet": "import numpy as np\nfrom scipy.integrate import solve_ivp\n\ndef dy_dt(t, y):\n    return -0.5 * y\n\nsol = solve_ivp(dy_dt, [0, 10], [2.0], t_eval=np.linspace(0, 10, 100))\nprint(sol.y[0, -1])  # decays to ~0.09"
       }
     ],
     "references": [
@@ -496,7 +496,7 @@ const topics = [
     "summary": "Complex analysis studies functions of a complex variable. Analyticity and contour integration yield powerful tools with applications in signal processing, physics, and number theory.",
     "keyPoints": [
       "A function is holomorphic if it is complex differentiable in a neighborhood.",
-      "Cauchy's theorem: integrals of holomorphic functions around closed contours vanish.",
+      "Cauchy's theorem: the integral around a closed contour vanishes when the function is holomorphic on a simply connected domain containing it.",
       "The residue theorem evaluates real integrals and series."
     ],
     "formulas": [
@@ -1540,7 +1540,7 @@ const topics = [
       },
       {
         "name": "Convergence rate (convex, L-smooth)",
-        "tex": "f(x_k) - f^* \\le \\frac{2L\\|x_0 - x^*\\|^2}{k}"
+        "tex": "f(x_k) - f^* \\le \\frac{2L\\|x_0 - x^*\\|^2}{k}\\quad\\text{with }0<\\eta\\leq1/L\\text{ and an attained minimum}"
       },
       {
         "name": "Momentum",
@@ -1660,7 +1660,7 @@ const topics = [
       },
       {
         "name": "KKT conditions",
-        "tex": "\\nabla_x \\mathcal{L} = 0, \\quad g_i(x) \\le 0, \\quad \\lambda_i \\ge 0, \\quad \\lambda_i g_i(x) = 0"
+        "tex": "\\nabla_x \\mathcal{L} = 0, \\quad g_i(x) \\le 0, \\quad \\lambda_i \\ge 0, \\quad \\lambda_i g_i(x) = 0,\\quad h_j(x)=0"
       },
       {
         "name": "Strong duality (Slater)",
@@ -1775,7 +1775,7 @@ const topics = [
     "formulas": [
       {
         "name": "OLS estimator",
-        "tex": "\\hat{\\beta} = (X^\\top X)^{-1} X^\\top y"
+        "tex": "\\hat{\\beta} = (X^\\top X)^{-1} X^\\top y\\quad\\text{if }X\\text{ has full column rank}"
       },
       {
         "name": "Ridge regression",
@@ -1845,13 +1845,13 @@ const topics = [
       },
       {
         "name": "Log-likelihood",
-        "tex": "\\ell(\\beta) = \\sum_{i=1}^n y_i X_i^\\top \\beta - \\log(1 + e^{X_i^\\top \\beta})"
+        "tex": "\\ell(\\beta)=\\sum_{i=1}^n\\left[y_i X_i^\\top\\beta-\\log(1+e^{X_i^\\top\\beta})\\right]"
       }
     ],
     "code": [
       {
         "language": "python",
-        "snippet": "from sklearn.linear_model import LogisticRegression\n\n# X: features, y: binary labels\nclf = LogisticRegression().fit(X, y)\nprint(clf.coef_)"
+        "snippet": "from sklearn.datasets import make_classification\nfrom sklearn.linear_model import LogisticRegression\n\nX, y = make_classification(n_samples=100, n_features=4, random_state=42)\nclf = LogisticRegression().fit(X, y)\nprint(clf.coef_)"
       }
     ],
     "references": [
@@ -1913,7 +1913,7 @@ const topics = [
     "code": [
       {
         "language": "python",
-        "snippet": "import torch\n\nmodel = torch.nn.Sequential(\n    torch.nn.Linear(10, 64),\n    torch.nn.ReLU(),\n    torch.nn.Linear(64, 1)\n)\nloss_fn = torch.nn.MSELoss()\noptimizer = torch.optim.SGD(model.parameters(), lr=0.01)\n\n# Forward + backward pass\nout = model(x)\nloss = loss_fn(out, y)\nloss.backward()\noptimizer.step()"
+        "snippet": "import torch\n\nmodel = torch.nn.Sequential(\n    torch.nn.Linear(10, 64),\n    torch.nn.ReLU(),\n    torch.nn.Linear(64, 1)\n)\nloss_fn = torch.nn.MSELoss()\noptimizer = torch.optim.SGD(model.parameters(), lr=0.01)\n\nx = torch.randn(8, 10)\ny = torch.randn(8, 1)\noptimizer.zero_grad()\n\n# Forward + backward pass\nout = model(x)\nloss = loss_fn(out, y)\nloss.backward()\noptimizer.step()"
       }
     ],
     "references": [
@@ -1958,7 +1958,7 @@ const topics = [
     ],
     "formulas": [
       {
-        "name": "2D convolution",
+        "name": "2D cross-correlation (used by CNN libraries)",
         "tex": "(I * K)(i,j) = \\sum_m \\sum_n I(i+m, j+n) K(m,n)"
       },
       {
@@ -1969,7 +1969,7 @@ const topics = [
     "code": [
       {
         "language": "python",
-        "snippet": "import torch.nn as nn\n\nconv = nn.Conv2d(in_channels=3, out_channels=16, kernel_size=3, padding=1)\npool = nn.MaxPool2d(kernel_size=2)\nout = pool(conv(image_tensor))"
+        "snippet": "import torch\nimport torch\nimport torch.nn as nn\n\nconv = nn.Conv2d(in_channels=3, out_channels=16, kernel_size=3, padding=1)\npool = nn.MaxPool2d(kernel_size=2)\nimage_tensor = torch.randn(1, 3, 32, 32)\nout = pool(conv(image_tensor))"
       }
     ],
     "references": [
@@ -2026,7 +2026,7 @@ const topics = [
     "code": [
       {
         "language": "python",
-        "snippet": "import torch.nn as nn\n\nrnn = nn.LSTM(input_size=10, hidden_size=20, num_layers=2, batch_first=True)\nout, (hn, cn) = rnn(sequence)"
+        "snippet": "import torch\nimport torch\nimport torch.nn as nn\n\nrnn = nn.LSTM(input_size=10, hidden_size=20, num_layers=2, batch_first=True)\nsequence = torch.randn(4, 8, 10)\nout, (hn, cn) = rnn(sequence)"
       }
     ],
     "references": [
@@ -2150,7 +2150,7 @@ const topics = [
     "code": [
       {
         "language": "python",
-        "snippet": "from statsmodels.tsa.arima.model import ARIMA\n\nmodel = ARIMA(series, order=(1, 0, 1))\nres = model.fit()\nprint(res.summary())"
+        "snippet": "import numpy as np\nfrom statsmodels.tsa.arima.model import ARIMA\n\nseries = np.random.default_rng(42).normal(size=200)\nmodel = ARIMA(series, order=(1, 0, 1))\nres = model.fit()\nprint(res.summary())"
       }
     ],
     "references": [
@@ -2276,7 +2276,7 @@ const topics = [
     "code": [
       {
         "language": "python",
-        "snippet": "from scipy.stats import norm\n\ndef black_scholes_call(S, K, T, r, sigma):\n    d1 = (np.log(S/K) + (r + 0.5*sigma**2)*T) / (sigma*np.sqrt(T))\n    d2 = d1 - sigma*np.sqrt(T)\n    return S*norm.cdf(d1) - K*np.exp(-r*T)*norm.cdf(d2)\n\nprint(black_scholes_call(100, 100, 1, 0.05, 0.2))"
+        "snippet": "import numpy as np\nfrom scipy.stats import norm\n\ndef black_scholes_call(S, K, T, r, sigma):\n    d1 = (np.log(S/K) + (r + 0.5*sigma**2)*T) / (sigma*np.sqrt(T))\n    d2 = d1 - sigma*np.sqrt(T)\n    return S*norm.cdf(d1) - K*np.exp(-r*T)*norm.cdf(d2)\n\nprint(black_scholes_call(100, 100, 1, 0.05, 0.2))"
       }
     ],
     "references": [
@@ -2459,7 +2459,7 @@ const topics = [
     "code": [
       {
         "language": "python",
-        "snippet": "from multiprocessing import Pool\n\ndef square(x):\n    return x**2\n\nwith Pool(4) as p:\n    results = p.map(square, range(1000))\nprint(sum(results))"
+        "snippet": "from multiprocessing import Pool\n\ndef square(x):\n    return x**2\n\nif __name__ == '__main__':\n    with Pool(4) as p:\n        results = p.map(square, range(1000))\n    print(sum(results))"
       }
     ],
     "references": [
@@ -2508,7 +2508,7 @@ const topics = [
     "formulas": [
       {
         "name": "Conjugate gradient",
-        "tex": "\\text{For } A \\succ 0, \\text{ solve } Ax = b \\text{ in at most } n \\text{ steps.}"
+        "tex": "\\text{For }A=A^\\top\\succ0,\\text{ CG terminates in at most }n\\text{ steps in exact arithmetic.}"
       },
       {
         "name": "Krylov subspace",
@@ -2516,13 +2516,13 @@ const topics = [
       },
       {
         "name": "Conditioning",
-        "tex": "\\kappa(A) = \\sigma_{\\max}(A)/\\sigma_{\\min}(A)"
+        "tex": "\\kappa_2(A)=\\sigma_{\\max}(A)/\\sigma_{\\min}(A)\\quad\\text{for nonsingular }A"
       }
     ],
     "code": [
       {
         "language": "python",
-        "snippet": "from scipy.sparse import diags\nfrom scipy.sparse.linalg import cg\n\nn = 1000\nA = diags([-1, 2, -1], [-1, 0, 1], shape=(n, n))\nb = np.ones(n)\nx, info = cg(A, b)\nprint(info)"
+        "snippet": "import numpy as np\nfrom scipy.sparse import diags\nfrom scipy.sparse.linalg import cg\n\nn = 1000\nA = diags([-1, 2, -1], [-1, 0, 1], shape=(n, n))\nb = np.ones(n)\nx, info = cg(A, b)\nprint(info)"
       }
     ],
     "references": [

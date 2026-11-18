@@ -33,14 +33,14 @@ All content is written in English and sourced from authoritative textbooks, pape
 Requires Node.js (managed runtime preferred).
 
 ```bash
-node build.js
+npm run build
 ```
 
 To build for a GitHub Pages project site (repo served under a subpath), set `BASE_PATH`:
 
 ```bash
 # Example: repo named "math-knowledge-graph"
-BASE_PATH=/math-knowledge-graph/ node build.js
+BASE_PATH=/math-knowledge-graph/ npm run build
 ```
 
 ## Deploy to GitHub Pages
@@ -89,3 +89,14 @@ See each topic page for specific references.
 ## License
 
 [MIT](./LICENSE)
+
+## Validation and fixes
+
+Run `npm test` to check the catalog, relationship deduplication, generated links,
+base paths, stale page cleanup, and the preview server. `npm run serve` serves
+the generated site on `127.0.0.1:8080` (build without `BASE_PATH` for this preview).
+The build needs only Node.js; graph, highlighting, and MathJax runtime assets
+are loaded from CDNs. Graph and search share one cached data request.
+Mathematical corrections and example limitations are recorded in
+[CORRECTIONS.md](CORRECTIONS.md). A consolidated app preserving both source
+catalogs is available at [math-merged](https://github.com/zmath01/math-merged).

@@ -22,6 +22,7 @@ const edgeColor = { prerequisite: "#adb5bd", related: "#dee2e6", application: "#
 
 let cy = null;
 let graphData = { nodes: [], edges: [] };
+let graphDataPromise = null;
 
 function getBasePath() {
   const base = document.querySelector('base')?.getAttribute('href') || '/';
@@ -33,10 +34,13 @@ function topicUrl(id) {
 }
 
 async function loadGraphData() {
-  const url = getBasePath() + 'data.json';
-  const res = await fetch(url);
-  if (!res.ok) throw new Error('Failed to load graph data');
-  return await res.json();
+  if (!graphDataPromise) {
+    graphDataPromise = fetch(getBasePath() + 'data.json').then(res => {
+      if (!res.ok) throw new Error('Failed to load graph data');
+      return res.json();
+    }).catch(error => { graphDataPromise = null; throw error; });
+  }
+  return graphDataPromise;
 }
 
 function initGraph(containerId, currentId) {
@@ -144,7 +148,18 @@ function highlightNode(nodeId) {
 function resetGraph() {
   if (!cy) return;
   cy.elements().removeClass('dimmed').removeClass('highlighted');
-  cy.layout({ name: 'cose', animate: true, animationDuration: 500 }).run();
+  applyDomainFilter();
+  cy.fit(undefined, 30);
+}
+
+function applyDomainFilter() {
+  if (!cy) return;
+  const domain = document.getElementById('graph-filter')?.value;
+  cy.elements().removeClass('dimmed');
+  if (!domain) return;
+  cy.elements().addClass('dimmed');
+  cy.nodes().filter(n => n.data('domain') === domain).removeClass('dimmed');
+  cy.edges().filter(e => !e.source().hasClass('dimmed') && !e.target().hasClass('dimmed')).removeClass('dimmed');
 }
 
 function initSearch() {
@@ -195,28 +210,21 @@ function setupGraphControls() {
 
   const filterSelect = document.getElementById('graph-filter');
   if (filterSelect) {
-    filterSelect.addEventListener('change', () => {
-      const domain = filterSelect.value;
-      if (!cy) return;
-      if (!domain) {
-        cy.elements().removeClass('dimmed');
-      } else {
-        cy.elements().addClass('dimmed');
-        cy.nodes().filter(n => n.data('domain') === domain).removeClass('dimmed');
-        cy.edges().filter(e => !e.source().hasClass('dimmed') && !e.target().hasClass('dimmed')).removeClass('dimmed');
-      }
-    });
+    filterSelect.addEventListener('change', applyDomainFilter);
   }
 }
 
-function renderTopicRelations(topic) {
+async function renderTopicRelations(topic) {
   const container = document.getElementById('topic-relations');
   if (!container) return;
+  let data;
+  try { data = await loadGraphData(); } catch { return; }
+  const titles = new Map(data.nodes.map(node => [node.id, node.title]));
 
-  const renderList = (items, title, type) => {
+  const renderList = (items, title) => {
     if (!items.length) return '';
     const links = items.map(id => {
-      return `<li><a href="${topicUrl(id)}">${escapeHtml(id)}</a></li>`;
+      return `<li><a href="${topicUrl(id)}">${escapeHtml(titles.get(id) || id)}</a></li>`;
     }).join('');
     return `<div class="relation-box">
       <h4>${escapeHtml(title)}</h4>

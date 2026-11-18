@@ -26,8 +26,11 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Run regression tests
+        run: npm test
+
       - name: Build site
-        run: BASE_PATH=/math-knowledge-graph/ node build.js
+        run: BASE_PATH="/${GITHUB_REPOSITORY#*/}/" npm run build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
