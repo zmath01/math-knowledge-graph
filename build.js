@@ -56,7 +56,7 @@ function renderSidebar(activeId) {
     grouped[t.domain].push(t);
   }
 
-  let html = '<nav><ul>';
+  let html = '<nav aria-label="Math topics"><ul>';
   html += `<li><a ${activeId === 'index' ? 'class="active"' : ''} href="${pageUrl('index.html')}">Knowledge Graph</a></li>`;
   html += '</ul>';
 
@@ -117,7 +117,22 @@ function wrap(title, body, activeId, mainClass = '') {
 ${header()}
 <div class="layout">
   <aside class="sidebar">
-    ${renderSidebar(activeId)}
+    <details class="topic-menu">
+      <summary>Math topics</summary>
+      ${renderSidebar(activeId)}
+    </details>
+    <script>
+      (() => {
+        const menu = document.querySelector('.topic-menu');
+        const compactLayout = window.matchMedia('(max-width: 880px)');
+        const adaptMenu = () => {
+          menu.open = !compactLayout.matches;
+          menu.toggleAttribute('data-desktop', !compactLayout.matches);
+        };
+        adaptMenu();
+        compactLayout.addEventListener('change', adaptMenu);
+      })();
+    </script>
   </aside>
   <main class="main ${mainClass}">
     ${body}
